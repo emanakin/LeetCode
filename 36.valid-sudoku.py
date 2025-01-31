@@ -5,27 +5,35 @@
 #
 
 # @lc code=start
+
+from collections import defaultdict
+
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        # store the validations
+        # track cols, sqrs and rows
+        rows = defaultdict(set)
+        cols = defaultdict(set)
+        squares = defaultdict(set)
         
-        # validate rows
+        # ittr through board
+        for i in range(9):
+            for j in range(9):
+                currNum = board[i][j] 
+                # encounter non number
+                if (currNum == "."):
+                    continue
+                
+                # if num is found in set
+                if (currNum in rows[i] or
+                    currNum in cols[j] or
+                    currNum in squares[((i // 3), (j // 3))]):
+                    return False    
+                    
+                # add unfound number to corrosponding set
+                rows[i].add(currNum)
+                cols[j].add(currNum)
+                squares[((i // 3), (j // 3))].add(currNum)
         
-        # validate cols
-        
-        # validate 3x3 sections
-        count = set()
-        rowMin = 0
-        colMin = 0
-        rowMax = 0
-        colMax = 0
-        
-        while rowMax != 9 and colmax != 9: 
-            for i in range(rowMin, rowMax):
-                for j in range(colMin, colMax):
-                    board[i][j] 
-            
-        
-        
+        return True
+         
 # @lc code=end
-
