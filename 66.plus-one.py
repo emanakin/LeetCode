@@ -18,6 +18,5 @@ class Solution:
         
         return [int(digit) for digit in str(larger_int)]
         
-        
 # @lc code=end
 
